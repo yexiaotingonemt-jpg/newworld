@@ -73,6 +73,13 @@ Default protocol filters:
 
 The protocol scraper reads the newest JSON table in the output directory and updates rows by `goodsId`. New goods are appended; existing goods are refreshed. If a previously in-sale item changes to sold/down, it records the observed sale time and sale duration.
 
+Current run rules:
+
+- Rows priced below 500 are filtered out before each run.
+- Existing active rows are refreshed first.
+- Newly scanned goods are processed afterward.
+- Goods already refreshed in the same run are not opened again.
+
 List scanning stops when any one condition is met:
 
 - scanned list goods reaches `--maxScanGoods` (default `10000`)
@@ -82,7 +89,7 @@ List scanning stops when any one condition is met:
 
 Delay controls:
 
-- `--delayMs 3000` controls detail-page request delay; default is 3000ms to reduce slider verification risk.
+- `--delayMs 1500` controls detail-page request delay; default is 1500ms.
 - `--listDelayMs 300` controls goods-list protocol page delay; default is 300ms.
 
 CAPTCHA handling is enabled by default. If a detail page returns a slider-verification page, the scraper opens a visible Chrome window and waits for manual completion:
@@ -110,7 +117,7 @@ Start-Process "C:\Program Files\Google\Chrome\Application\chrome.exe" -ArgumentL
 In that Chrome window, log in to Jiaoyimao and open the goods list page. Then run:
 
 ```powershell
-npm run scrape:chrome -- --maxScanGoods 10000 --targetGoods 1000 --outDir chrome-output --delayMs 8000 --listDelayMs 1500
+npm run scrape:chrome -- --maxScanGoods 10000 --targetGoods 1000 --outDir chrome-output --delayMs 1500 --listDelayMs 1000 --maxIdleScrolls 60 --stopOnCaptcha true --skipExistingDetails true --checkpointEvery 10
 ```
 
 This mode connects to `http://127.0.0.1:9222`, reuses the opened Chrome session, scrolls the list, and opens detail pages by clicking goods cards when possible. It does not bypass slider verification. If verification appears, pause the run and handle it manually in Chrome.

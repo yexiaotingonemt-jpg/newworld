@@ -79,7 +79,7 @@ const pageSize = Number(args.pageSize || 16);
 const maxScanGoods = Number(args.maxScanGoods || 10000);
 const targetGoods = Number(args.targetGoods || args.detailLimit || 1000);
 const detailLimit = args.detailLimit ? Number(args.detailLimit) : targetGoods;
-const delayMs = Number(args.delayMs || 3000);
+const delayMs = Number(args.delayMs || 1500);
 const listDelayMs = Number(args.listDelayMs || 300);
 const mode = args.mode || "protocol";
 const useBrowserMode = ["browser", "chrome", "cdp", "cdp-browser"].includes(mode);
@@ -91,7 +91,8 @@ const closeDelayMs = Number(args.closeDelayMs || 0);
 const browserMaxScrolls = Number(args.maxScrolls || 1000);
 const browserMaxIdleScrolls = Number(args.maxIdleScrolls || 20);
 const headless = Boolean(args.headless);
-const minPrice = Number(args.minPrice || 1000);
+const configuredMinPrice = args.minPrice === undefined ? 500 : Number(args.minPrice);
+const minPrice = Math.max(500, Number.isFinite(configuredMinPrice) ? configuredMinPrice : 500);
 const checkMissingExisting = args.checkMissingExisting !== "false";
 const manualCaptcha = args.manualCaptcha !== "false";
 const stopOnCaptcha = args.stopOnCaptcha === "true";
@@ -113,48 +114,26 @@ await mkdir(outDir, { recursive: true });
 const stamp = formatStamp(runAt);
 const jsonPath = path.join(outDir, `${EXPORT_PREFIX}-${stamp}.json`);
 const csvPath = path.join(outDir, `${EXPORT_PREFIX}-${stamp}.csv`);
-const previousRows = await loadPreviousRows(outDir);
+const previousRows = (await loadPreviousRows(outDir)).filter(meetsMinimumPrice);
 const previousById = new Map(previousRows.map((row) => [String(row.goodsId), row]));
-const currentRows = useBrowserMode
-  ? await collectGoodsWithBrowser()
-  : await collectGoodsWithProtocol();
 const seenIds = new Set();
-
-const limitedRows = detailLimit ? currentRows.slice(0, detailLimit) : currentRows;
 let stoppedByCaptcha = false;
-for (let i = 0; i < limitedRows.length; i += 1) {
-  const goods = limitedRows[i];
-  seenIds.add(goods.goodsId);
-  const previous = previousById.get(goods.goodsId);
-  if (skipExistingDetails && hasSuccessfulDetail(previous)) {
-    console.log(`Skip ${i + 1}/${limitedRows.length}: ${goods.goodsId}`);
-    previousById.set(goods.goodsId, mergeRow(previous, goods, {}));
-    continue;
-  }
-  console.log(`Detail ${i + 1}/${limitedRows.length}: ${goods.goodsId}`);
-  const detail = await fetchGoodsDetail(goods).catch((error) => ({ error: error?.message || String(error) }));
-  const row = mergeRow(previous, goods, detail);
-  previousById.set(goods.goodsId, row);
-  if (detail?.error || (i + 1) % checkpointEvery === 0) await saveOutputRows();
-  if (stopOnCaptcha && detail?.error === "CAPTCHA_IN_BROWSER") {
-    stoppedByCaptcha = true;
-    console.log(`Stop detail scan: CAPTCHA_IN_BROWSER at ${goods.goodsId}`);
-    break;
-  }
-  await sleep(delayMs);
+
+if (checkMissingExisting) {
+  await ensureBrowserDetailSession();
+  stoppedByCaptcha = await refreshExistingActiveRows(seenIds);
 }
 
-if (checkMissingExisting && !stoppedByCaptcha) {
-  const missing = [...previousById.values()].filter((row) => row.detailUrl && !seenIds.has(String(row.goodsId)) && row.status === "\u5728\u552e");
-  for (let i = 0; i < missing.length; i += 1) {
-    const row = missing[i];
-    console.log(`Status check ${i + 1}/${missing.length}: ${row.goodsId}`);
-    const detail = await fetchGoodsDetail(row).catch((error) => ({ error: error?.message || String(error) }));
-    previousById.set(String(row.goodsId), mergeRow(row, row, detail, { statusOnly: true }));
-    if (detail?.error || (i + 1) % checkpointEvery === 0) await saveOutputRows();
-    await sleep(delayMs);
-  }
+const currentRows = stoppedByCaptcha
+  ? []
+  : useBrowserMode
+    ? await collectGoodsWithBrowser()
+    : await collectGoodsWithProtocol();
+
+if (!stoppedByCaptcha) {
+  stoppedByCaptcha = await fetchNewOrChangedRows(currentRows, seenIds);
 }
+
 
 const outputRows = await saveOutputRows();
 if (manualDetailBrowser) await manualDetailBrowser.close();
@@ -203,6 +182,71 @@ async function cleanupOldOutputFiles() {
     && !keep.has(file)
   ));
   await Promise.all(oldOutputs.map((file) => unlink(path.join(outDir, file)).catch(() => {})));
+}
+
+async function ensureBrowserDetailSession() {
+  if (!useBrowserMode || browserDetailPage) return;
+  const { browser, page, shouldClose } = await createBrowserSession();
+  browserDetailBrowser = browser;
+  browserDetailPage = page;
+  browserDetailShouldClose = shouldClose;
+}
+
+async function refreshExistingActiveRows(updatedIds) {
+  const existing = [...previousById.values()]
+    .filter((row) => row.detailUrl && isActiveStatus(row.status) && meetsMinimumPrice(row));
+  if (!existing.length) return false;
+
+  console.log(`Refresh existing active rows: ${existing.length}`);
+  for (let i = 0; i < existing.length; i += 1) {
+    const row = existing[i];
+    const id = String(row.goodsId);
+    updatedIds.add(id);
+    console.log(`Status check ${i + 1}/${existing.length}: ${id}`);
+    const detail = await fetchGoodsDetail(row).catch((error) => ({ error: error?.message || String(error) }));
+    previousById.set(id, mergeRow(row, row, detail, { statusOnly: true }));
+    if (detail?.error || (i + 1) % checkpointEvery === 0) await saveOutputRows();
+    if (stopOnCaptcha && detail?.error === "CAPTCHA_IN_BROWSER") {
+      console.log(`Stop existing refresh: CAPTCHA_IN_BROWSER at ${id}`);
+      return true;
+    }
+    await sleep(delayMs);
+  }
+  return false;
+}
+
+async function fetchNewOrChangedRows(currentRows, updatedIds) {
+  const limitedRows = detailLimit ? currentRows.slice(0, detailLimit) : currentRows;
+  for (let i = 0; i < limitedRows.length; i += 1) {
+    const goods = limitedRows[i];
+    const id = String(goods.goodsId);
+    const previous = previousById.get(id);
+
+    if (updatedIds.has(id)) {
+      console.log(`Skip updated ${i + 1}/${limitedRows.length}: ${id}`);
+      previousById.set(id, mergeRow(previous, goods, {}));
+      continue;
+    }
+
+    updatedIds.add(id);
+    if (skipExistingDetails && hasSuccessfulDetail(previous)) {
+      console.log(`Skip ${i + 1}/${limitedRows.length}: ${id}`);
+      previousById.set(id, mergeRow(previous, goods, {}));
+      continue;
+    }
+
+    console.log(`Detail ${i + 1}/${limitedRows.length}: ${id}`);
+    const detail = await fetchGoodsDetail(goods).catch((error) => ({ error: error?.message || String(error) }));
+    const row = mergeRow(previous, goods, detail);
+    previousById.set(id, row);
+    if (detail?.error || (i + 1) % checkpointEvery === 0) await saveOutputRows();
+    if (stopOnCaptcha && detail?.error === "CAPTCHA_IN_BROWSER") {
+      console.log(`Stop detail scan: CAPTCHA_IN_BROWSER at ${id}`);
+      return true;
+    }
+    await sleep(delayMs);
+  }
+  return false;
 }
 
 async function collectGoodsWithProtocol() {
@@ -255,7 +299,7 @@ async function collectGoodsWithBrowser() {
   await page.waitForSelector(GOODS_CARD_SELECTOR, { timeout: 30_000 });
 
   for (let scroll = 0; scroll < browserMaxScrolls && idle < browserMaxIdleScrolls; scroll += 1) {
-    const batch = await extractBrowserGoods(page);
+    const batch = await extractBrowserGoodsClean(page);
     for (const goods of batch) {
       if (!goods.goodsId) continue;
       goodsById.set(goods.goodsId, goods);
@@ -339,6 +383,47 @@ async function extractBrowserGoods(page) {
         transferService: text.includes("\u8d26\u53f7\u8f6c\u79fb") ? "\u662f" : "",
         publisher: ds.publisher || null,
         serverName: serverMatch ? clean(serverMatch[0]) : "",
+        pkServer: pkMatch ? pkMatch[0] : "",
+        detailUrl,
+        status: ds.state || "\u5728\u552e",
+        rawText: text,
+      };
+    });
+  }, GOODS_CARD_SELECTOR);
+}
+
+async function extractBrowserGoodsClean(page) {
+  return page.evaluate((selector) => {
+    const clean = (value) => String(value || "").replace(/\s+/g, " ").trim();
+    const num = (value) => {
+      if (value === undefined || value === null || value === "") return 0;
+      const parsed = Number(String(value).replace(/[^\d.]/g, ""));
+      return Number.isFinite(parsed) ? parsed : 0;
+    };
+    const server = (value) => {
+      const cleaned = String(value || "").replace(/\*\d(?=\D|\d{2,5}服)/g, "").replace(/[,，]/g, "");
+      const serverPattern = /((?:(?:争霸|北京|上海|天津|重庆|广东|江苏|浙江|山东|河南|湖南|湖北|安徽|福建|广西|川渝|云贵|西北|五周年))?\d{1,5}服)/;
+      const match = cleaned.match(new RegExp(`${serverPattern.source}(?=[\\s\\S]{0,30}\\/?PK\\d+)`, "i"))
+        || cleaned.match(serverPattern);
+      return match ? match[1] : "";
+    };
+    const selectedProductType = document.querySelector('.select-item.selected[data-filter-name="\u7c7b\u76ee\u5feb\u7b5b"]')?.dataset?.item_name || "\u6210\u54c1\u53f7";
+
+    return Array.from(document.querySelectorAll(selector)).map((el) => {
+      const ds = el.dataset || {};
+      const text = clean(el.textContent);
+      const href = el.getAttribute("href") || el.querySelector("a[href]")?.getAttribute("href");
+      const detailUrl = href ? new URL(href, location.href).href : null;
+      const pkMatch = text.match(/PK\d+/i);
+
+      return {
+        goodsId: ds.goodsid || ds.goodsId || ds.goods_id || null,
+        name: ds.goods_name || ds.goodsName || ds.goodsName || null,
+        price: num(ds.price || text.match(/¥\s*([\d,]+)/)?.[1]),
+        productType: selectedProductType,
+        transferService: text.includes("\u8d26\u53f7\u8f6c\u79fb") ? "\u662f" : "",
+        publisher: ds.publisher || null,
+        serverName: server(text),
         pkServer: pkMatch ? pkMatch[0] : "",
         detailUrl,
         status: ds.state || "\u5728\u552e",
@@ -458,7 +543,7 @@ function buildGoodsListData(page, pageSize) {
 function normalizeGoods(data) {
   if (!data?.goodsId) return null;
   const allText = JSON.stringify(data);
-  const serverName = data.serverName || extractPkServerText(allText);
+  const serverName = data.serverName || extractServerName(allText);
   return {
     goodsId: String(data.goodsId),
     name: data.title || data.originTitle || null,
@@ -478,9 +563,17 @@ function isTargetGoods(goods) {
   const text = [goods.name, goods.serverName, goods.pkServer, goods.rawText].filter(Boolean).join(" ");
   return goods.productType === "\u6210\u54c1\u53f7"
     && goods.transferService === "\u662f"
-    && goods.price >= minPrice
+    && meetsMinimumPrice(goods)
     && /\bPK\d+\b/i.test(text)
     && !/\u5730\u533a\u670d/.test(text);
+}
+
+function meetsMinimumPrice(goods) {
+  return Number(goods?.price || 0) >= minPrice;
+}
+
+function isActiveStatus(status) {
+  return normalizeStatus(status) === "\u5728\u552e";
 }
 
 async function fetchGoodsDetail(goods) {
@@ -1023,6 +1116,16 @@ function uniqueBy(items, keyFn) {
 
 function extractPkServerText(text) {
   return String(text || "").match(/PK\d+/i)?.[0] || "";
+}
+
+function extractServerName(text) {
+  const cleaned = String(text || "")
+    .replace(/\*\d(?=\D|\d{2,5}服)/g, "")
+    .replace(/[,，]/g, "");
+  const serverPattern = /((?:(?:争霸|北京|上海|天津|重庆|广东|江苏|浙江|山东|河南|湖南|湖北|安徽|福建|广西|川渝|云贵|西北|五周年))?\d{1,5}服)/;
+  const match = cleaned.match(new RegExp(`${serverPattern.source}(?=[\\s\\S]{0,30}\\/?PK\\d+)`, "i"))
+    || cleaned.match(serverPattern);
+  return match ? match[1] : "";
 }
 
 function getMtopToken(cookie) {
