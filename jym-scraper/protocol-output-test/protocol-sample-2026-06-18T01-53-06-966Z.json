@@ -1,0 +1,260 @@
+{
+  "source": "protocol-sample",
+  "pages": 1,
+  "pageSize": 16,
+  "goodsCount": 11,
+  "firstGoods": {
+    "goodsId": "1781529345884476",
+    "name": "三幻神拉满，满将非典废",
+    "price": 33000,
+    "productType": "成品号",
+    "publisher": "OPPO",
+    "serverName": "4387服 巧言令色/PK25127",
+    "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781529345884476.html?isGray=true",
+    "gameName": "三国志战略版",
+    "gameId": 1009207,
+    "rawText": "三幻神拉满，满将非典废 三幻神拉满，满将非典废 4387服 巧言令色/PK25127 [object Object] [object Object] [object Object]"
+  },
+  "firstDetail": {
+    "goodsId": "1781529345884476",
+    "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781529345884476.html?isGray=true",
+    "htmlBytes": 1650310,
+    "heroCount": 185,
+    "firstHeroes": [
+      {
+        "label": "20 曹操",
+        "level": 20,
+        "name": "曹操",
+        "rawName": "曹操",
+        "rarity": "典藏",
+        "season": "s1",
+        "stage": 5,
+        "detailIndex": "稀有度:典藏;阵营:魏;赛季:s1;"
+      },
+      {
+        "label": "35 贾诩",
+        "level": 35,
+        "name": "贾诩",
+        "rawName": "贾诩",
+        "rarity": "五星",
+        "season": "s3",
+        "stage": 5,
+        "detailIndex": "阵容:3-荀彧队;稀有度:五星;阵营:魏;赛季:s3;"
+      },
+      {
+        "label": "20 司马懿",
+        "level": 20,
+        "name": "司马懿",
+        "rawName": "司马懿",
+        "rarity": "典藏",
+        "season": "s2",
+        "stage": 5,
+        "detailIndex": "稀有度:典藏;阵营:魏;赛季:s2;"
+      },
+      {
+        "label": "35 SP荀彧",
+        "level": 35,
+        "name": "sp荀彧",
+        "rawName": "SP荀彧",
+        "rarity": "典藏",
+        "season": "sp",
+        "stage": 5,
+        "detailIndex": "阵容:3-荀彧队;稀有度:典藏;阵营:魏;赛季:sp;"
+      },
+      {
+        "label": "20 荀攸",
+        "level": 20,
+        "name": "荀攸",
+        "rawName": "荀攸",
+        "rarity": "五星",
+        "season": "s2",
+        "stage": 5,
+        "detailIndex": "稀有度:五星;阵营:魏;赛季:s2;"
+      },
+      {
+        "label": "20 程昱",
+        "level": 20,
+        "name": "程昱",
+        "rawName": "程昱",
+        "rarity": "五星",
+        "season": "s1",
+        "stage": 5,
+        "detailIndex": "稀有度:五星;阵营:魏;赛季:s1;"
+      },
+      {
+        "label": "20 夏侯惇",
+        "level": 20,
+        "name": "夏侯惇",
+        "rawName": "夏侯惇",
+        "rarity": "典藏",
+        "season": "s1",
+        "stage": 5,
+        "detailIndex": "稀有度:典藏;阵营:魏;赛季:s1;"
+      },
+      {
+        "label": "20 SP曹真",
+        "level": 20,
+        "name": "sp曹真",
+        "rawName": "SP曹真",
+        "rarity": "典藏",
+        "season": "sp",
+        "stage": 5,
+        "detailIndex": "稀有度:典藏;阵营:魏;赛季:sp;"
+      },
+      {
+        "label": "20 王元姬",
+        "level": 20,
+        "name": "王元姬",
+        "rawName": "王元姬",
+        "rarity": "五星",
+        "season": "s2",
+        "stage": 5,
+        "detailIndex": "稀有度:五星;阵营:魏;赛季:s2;"
+      },
+      {
+        "label": "20 郭嘉",
+        "level": 20,
+        "name": "郭嘉",
+        "rawName": "郭嘉",
+        "rarity": "典藏",
+        "season": "s1",
+        "stage": 5,
+        "detailIndex": "稀有度:典藏;阵营:魏;赛季:s1;"
+      }
+    ]
+  },
+  "goods": [
+    {
+      "goodsId": "1781529345884476",
+      "name": "三幻神拉满，满将非典废",
+      "price": 33000,
+      "productType": "成品号",
+      "publisher": "OPPO",
+      "serverName": "4387服 巧言令色/PK25127",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781529345884476.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "三幻神拉满，满将非典废 三幻神拉满，满将非典废 4387服 巧言令色/PK25127 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1778225187708185",
+      "name": "有求贤满红三幻神带两个满红A8",
+      "price": 29999,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "5017服 稳操左券/PK25146",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1778225187708185.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "有求贤满红三幻神带两个满红A8 有求贤满红三幻神带两个满红A8 5017服 稳操左券/PK25146 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781652460654090",
+      "name": "卡池巨厚的全网最低大满贯",
+      "price": 78888,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "1155服 一举两得/PK25004",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781652460654090.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "卡池巨厚的全网最低大满贯 卡池巨厚的全网最低大满贯 1155服 一举两得/PK25004 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781089700638278",
+      "name": "皇马大汉弓典藏法官",
+      "price": 2499,
+      "productType": "成品号",
+      "publisher": "华为",
+      "serverName": "五周年18服 新天策/PK25116",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781089700638278.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "皇马大汉弓典藏法官 皇马大汉弓典藏法官 五周年18服 新天策/PK25116 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781743914373685",
+      "name": "不想玩了，阵容还行",
+      "price": 198,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "4463服 朗目疏眉/PK19295",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781743914373685.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "不想玩了，阵容还行 不想玩了，阵容还行 4463服 朗目疏眉/PK19295 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781695462674343",
+      "name": "满红三幻神，典藏4红sp曹操",
+      "price": 25888,
+      "productType": "成品号",
+      "publisher": "OPPO",
+      "serverName": "5491服 占星卜卦/PK25120",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781695462674343.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "满红三幻神，典藏4红sp曹操 满红三幻神，典藏4红sp曹操 5491服 占星卜卦/PK25120 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781058265305748",
+      "name": "5000区满三幻，韬晦，卡池厚",
+      "price": 31888,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "5036服 棋布错峙/PK25144",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781058265305748.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "5000区满三幻，韬晦，卡池厚 5000区满三幻，韬晦，卡池厚 5036服 棋布错峙/PK25144 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781562103604001",
+      "name": "幻神底子号还有4万金珠",
+      "price": 788,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "4518服 荟萃一堂/PK21290",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781562103604001.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "幻神底子号还有4万金珠 幻神底子号还有4万金珠 4518服 荟萃一堂/PK21290 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781684453509731",
+      "name": "太尉丨法官丨都督丨核弹张丨温侯",
+      "price": 1388,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "2949服 落落大方/PK21298",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781684453509731.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "太尉丨法官丨都督丨核弹张丨温侯 太尉丨法官丨都督丨核弹张丨温侯 2949服 落落大方/PK21298 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1778337623461399",
+      "name": "出自己看重塑全核心",
+      "price": 18000,
+      "productType": "成品号",
+      "publisher": "华为",
+      "serverName": "4937服 诚心实意/PK25127",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1778337623461399.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "出自己看重塑全核心 出自己看重塑全核心 4937服 诚心实意/PK25127 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1758643654051500",
+      "name": "超级划算捡漏号",
+      "price": 1700,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "3521服 瑕不掩瑜/PK19279",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1758643654051500.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "超级划算捡漏号 超级划算捡漏号 3521服 瑕不掩瑜/PK19279 [object Object] [object Object] [object Object]"
+    }
+  ]
+}

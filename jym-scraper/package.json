@@ -1,0 +1,16 @@
+{
+  "name": "jym-scraper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "scrape": "C:\\Progra~1\\nodejs\\node.exe scrape-jym.mjs",
+    "protocol:sample": "C:\\Progra~1\\nodejs\\node.exe protocol-sample.mjs",
+    "scrape:protocol": "C:\\Progra~1\\nodejs\\node.exe scrape-protocol.mjs",
+    "scrape:browser": "C:\\Progra~1\\nodejs\\node.exe scrape-protocol.mjs --mode browser",
+    "scrape:chrome": "C:\\Progra~1\\nodejs\\node.exe scrape-protocol.mjs --mode chrome"
+  },
+  "dependencies": {
+    "playwright": "^1.54.0"
+  }
+}

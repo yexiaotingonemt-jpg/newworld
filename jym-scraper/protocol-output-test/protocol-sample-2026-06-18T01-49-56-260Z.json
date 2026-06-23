@@ -1,0 +1,159 @@
+{
+  "source": "protocol-sample",
+  "pages": 1,
+  "pageSize": 16,
+  "goodsCount": 11,
+  "firstGoods": {
+    "goodsId": "1778225187708185",
+    "name": "有求贤满红三幻神带两个满红A8",
+    "price": 29999,
+    "productType": "成品号",
+    "publisher": "九游",
+    "serverName": "5017服 稳操左券/PK25146",
+    "detailUrl": "https://www.jiaoyimao.com/jg1009207/1778225187708185.html?isGray=true",
+    "gameName": "三国志战略版",
+    "gameId": 1009207,
+    "rawText": "有求贤满红三幻神带两个满红A8 有求贤满红三幻神带两个满红A8 5017服 稳操左券/PK25146 [object Object] [object Object] [object Object]"
+  },
+  "firstDetail": {
+    "goodsId": "1778225187708185",
+    "detailUrl": "https://www.jiaoyimao.com/jg1009207/1778225187708185.html?isGray=true",
+    "htmlBytes": 1594238,
+    "heroCount": 0,
+    "firstHeroes": []
+  },
+  "goods": [
+    {
+      "goodsId": "1778225187708185",
+      "name": "有求贤满红三幻神带两个满红A8",
+      "price": 29999,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "5017服 稳操左券/PK25146",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1778225187708185.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "有求贤满红三幻神带两个满红A8 有求贤满红三幻神带两个满红A8 5017服 稳操左券/PK25146 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781529345884476",
+      "name": "三幻神拉满，满将非典废",
+      "price": 33000,
+      "productType": "成品号",
+      "publisher": "OPPO",
+      "serverName": "4387服 巧言令色/PK25127",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781529345884476.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "三幻神拉满，满将非典废 三幻神拉满，满将非典废 4387服 巧言令色/PK25127 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781652460654090",
+      "name": "卡池巨厚的全网最低大满贯",
+      "price": 78888,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "1155服 一举两得/PK25004",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781652460654090.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "卡池巨厚的全网最低大满贯 卡池巨厚的全网最低大满贯 1155服 一举两得/PK25004 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781746523669439",
+      "name": "16动态/雁行慷慨/满装网红",
+      "price": 400,
+      "productType": "成品号",
+      "publisher": "OPPO",
+      "serverName": "4932服 逐日追风/PK21292",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781746523669439.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "16动态/雁行慷慨/满装网红 16动态/雁行慷慨/满装网红 4932服 逐日追风/PK21292 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781089700638278",
+      "name": "皇马大汉弓典藏法官",
+      "price": 2499,
+      "productType": "成品号",
+      "publisher": "华为",
+      "serverName": "五周年18服 新天策/PK25116",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781089700638278.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "皇马大汉弓典藏法官 皇马大汉弓典藏法官 五周年18服 新天策/PK25116 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1780500225335853",
+      "name": "太尉关关张三势吕吴枪吴弓战法全",
+      "price": 100,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "2073服 捕风捉影/PK25161",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1780500225335853.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "太尉关关张三势吕吴枪吴弓战法全 太尉关关张三势吕吴枪吴弓战法全 2073服 捕风捉影/PK25161 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781695462674343",
+      "name": "满红三幻神，典藏4红sp曹操",
+      "price": 25888,
+      "productType": "成品号",
+      "publisher": "OPPO",
+      "serverName": "5491服 占星卜卦/PK25120",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781695462674343.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "满红三幻神，典藏4红sp曹操 满红三幻神，典藏4红sp曹操 5491服 占星卜卦/PK25120 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781058265305748",
+      "name": "5000区满三幻，韬晦，卡池厚",
+      "price": 31888,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "5036服 棋布错峙/PK25144",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781058265305748.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "5000区满三幻，韬晦，卡池厚 5000区满三幻，韬晦，卡池厚 5036服 棋布错峙/PK25144 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1781684453509731",
+      "name": "太尉丨法官丨都督丨核弹张丨温侯",
+      "price": 1388,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "2949服 落落大方/PK21298",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1781684453509731.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "太尉丨法官丨都督丨核弹张丨温侯 太尉丨法官丨都督丨核弹张丨温侯 2949服 落落大方/PK21298 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1778337623461399",
+      "name": "出自己看重塑全核心",
+      "price": 18000,
+      "productType": "成品号",
+      "publisher": "华为",
+      "serverName": "4937服 诚心实意/PK25127",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1778337623461399.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "出自己看重塑全核心 出自己看重塑全核心 4937服 诚心实意/PK25127 [object Object] [object Object] [object Object]"
+    },
+    {
+      "goodsId": "1758643654051500",
+      "name": "超级划算捡漏号",
+      "price": 1700,
+      "productType": "成品号",
+      "publisher": "九游",
+      "serverName": "3521服 瑕不掩瑜/PK19279",
+      "detailUrl": "https://www.jiaoyimao.com/jg1009207/1758643654051500.html?isGray=true",
+      "gameName": "三国志战略版",
+      "gameId": 1009207,
+      "rawText": "超级划算捡漏号 超级划算捡漏号 3521服 瑕不掩瑜/PK19279 [object Object] [object Object] [object Object]"
+    }
+  ]
+}
